@@ -4,11 +4,13 @@ import {BrowserRouter} from 'react-router-dom';
 
 import {App} from "./App";
 import {Provider} from "react-redux";
-import {store} from "./redux";
+import {setupStore} from "./redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+const store = setupStore();
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>
@@ -19,4 +21,5 @@ root.render(
     </React.StrictMode>
 );
 
-
+// замість store в імпорти кладемо setupStore, викликаємо її і називаємо store
+// подальші настройки в компонентах

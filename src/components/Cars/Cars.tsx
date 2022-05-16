@@ -1,14 +1,25 @@
-import React, {FC} from 'react';
-import {useSelector} from "react-redux";
+import React, {FC, useEffect} from 'react';
 
-const Cars:FC = () => {
-    useSelector(state => state.carReducer())
+import {useAppDispatch, useAppSelector} from "../../hook";
+import {Car} from "../Car/Car";
+import {carActions} from "../../redux";
 
+
+const Cars: FC = () => {
+    const {cars} = useAppSelector(state => state.carReducer);
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(carActions.getAll())
+    },[dispatch])
     return (
         <div>
-            Cars
+            {cars.map(car=> <Car key={car.id} car={car}/>)}
         </div>
     );
 };
 
 export {Cars};
+
+//щоб все працювало, треба зробити свої власні хуки в папці hook>redux.ts
+// і витягнути їх сюди
